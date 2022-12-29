@@ -1,0 +1,43 @@
+version: '3'
+services:
+  react:
+    build:
+      context: .
+      dockerfile: ./docker/client/Dockerfile
+    container_name: react_container
+    tty: true
+    volumes:
+      - ./client:/app/client
+    command: sh -c "cd /app/client && yarn install && yarn start"
+    ports:
+      - 3000:3000
+  go:
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile
+    container_name: go_container
+    ports:
+      - 8000:8000
+    tty: true
+    volumes:
+      - ./backend:/app/backend
+    command: go run main.go
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: react-go-todo-app
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./.data/initdb.d:/docker-entrypoint-initdb.d
+      - ./.data/conf.d:/etc/mysql/conf.d
+      - ./.data/mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+    - 3306:3306
+    links:
+      - go
