@@ -3,18 +3,22 @@
 ```
 git clone git@github.com:AimotoRyosuke/react-golang-todo-app.git
 ```
-2. dockerイメージの作成
+2. プロジェクトに移動
+```
+cd react-golang-todo-app 
+```
+3. dockerイメージの作成
 ```
 docker-compose build
 ```
-3. dockerコンテナを起動
+4. dockerコンテナを起動
 ```
 docker-compose up -d
 ```
-4. 起動の確認
+5. 起動の確認
 ```
 React
-下記にアクセスできる
+下記にアクセスできる（初回は3分、2回目以降1分程かかる）
 http://localhost:3000/
 ```
 ```
