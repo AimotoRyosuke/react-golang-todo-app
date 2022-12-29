@@ -11,3 +11,22 @@ docker-compose build
 ```
 docker-compose up -d
 ```
+4. 起動の確認
+```
+React
+下記にアクセスできる
+http://localhost:3000/
+```
+```
+Go
+下記にアクセスできる
+http://localhost:8000/
+```
+```
+mysql
+下記にアクセスできる
+Host：127.0.0.1
+Username：root
+Password：root_password
+Port：3306
+```
